@@ -28,21 +28,23 @@ describe('App.vue', () => {
 
 describe('PwGenerator.vue', () => {
   const localVue = createLocalVue();
-  let vuetify
+  let vuetify;
   let wrapper;
+
   beforeEach(() => {
-    vuetify = new Vuetify;
+    vuetify = new Vuetify();
     wrapper = mount(PwGenerator, {
       localVue,
       vuetify
     });
-  })
+  });
+
   it('checks if special characters filed is present in PwGenerator', () => {
     expect(wrapper.find("#Sonderzeichen").exists()).toBe(true);
   });
 
   it("check if change is in var", async () => {
-    let input = wrapper.find("#Sonderzeichen")
+    let input = wrapper.find("#Sonderzeichen");
     //console.warn(input.html())
     await input.setValue("!§$%/()=*-_.:,;<>")
     expect(wrapper.vm.sonderzeichen).toBe("!§$%/()=*-_.:,;<>")
