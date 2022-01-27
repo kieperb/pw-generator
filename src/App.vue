@@ -1,16 +1,15 @@
 <template>
   <v-app>
     <v-main>
-      <PwGenerator/>
+      <PwGenerator />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
-import PwGenerator from './components/PwGenerator';
+import PwGenerator from "./components/PwGenerator";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     PwGenerator,
   },
