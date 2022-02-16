@@ -9,7 +9,11 @@
             label="Sonderzeichen"
             clearable
             @keydown="generatePassword"
-          ></v-text-field>
+            @click:clear="generatePassword"
+            :clear-icon-cb="generatePassword"
+          >
+            ></v-text-field
+          >
         </v-col>
       </v-row>
 
@@ -38,7 +42,7 @@
 
       <v-row>
         <v-col>
-          <v-text-field id="output_hash"></v-text-field>
+          <v-text-field readonly v-model="hash" id="output_hash"></v-text-field>
         </v-col>
       </v-row>
     </v-form>
@@ -46,6 +50,7 @@
 </template>
 
 <script>
+import bcrypt from "bcryptjs";
 export default {
   name: "PwGenerator",
 
@@ -59,6 +64,11 @@ export default {
   created: function () {
     this.generatePassword();
   },
+  computed: {
+    hash: function () {
+      return bcrypt.hashSync(this.password);
+    },
+  },
   methods: {
     getRandomChar() {
       const allowed =
@@ -68,8 +78,12 @@ export default {
     },
     generatePassword() {
       let result = "";
-      for (let c = 0; c < this.passwordLength; c++) {
-        result += this.getRandomChar();
+      let reg = new RegExp("[" + this.sonderzeichen + "]+");
+      while (!reg.test(result)) {
+        result = "";
+        for (let c = 0; c < this.passwordLength; c++) {
+          result += this.getRandomChar();
+        }
       }
       // todo testen ob min: 1 großBuchstabe, 1 kleinBuchstabe, 1 Zahl und 1 Sonderzeichen enthalten ist
       // wenn nicht nochmal "würfeln"

@@ -9,6 +9,32 @@ Vue.use(Vuetify);
 Vuetify.config.silent = true;
 
 describe('App.vue', () => {
+  // DO NOT use Vuetify on the localInstance
+  // This is bootstrapped in the jest setup
+  // file located in ./tests/setup.js
+  //
+  // localVue.use(Vuetify)
+
+  const localVue = createLocalVue();
+  let vuetify;
+
+  beforeEach(() => {
+    vuetify = new Vuetify();
+  });
+
+  it('should work', () => {
+    const wrapper = mount(App, {
+      localVue,
+      vuetify,
+    });
+    // With jest we can create snapshot files of the HTML output
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+});
+
+
+
+describe('App.vue', () => {
   it('checks if pwgenerator is present in App', () => {
     const wrapper = shallowMount(App);
     expect(wrapper.findComponent({name: "PwGenerator"}).exists()).toBe(true);
