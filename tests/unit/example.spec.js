@@ -72,37 +72,37 @@ describe('PwGenerator.vue', () => {
   it("check if change is in var", async () => {
     let input = wrapper.find("#Sonderzeichen");
     //console.warn(input.html())
-    await input.setValue("!§$%/()=*-_.:,;<>")
-    expect(wrapper.vm.sonderzeichen).toBe("!§$%/()=*-_.:,;<>")
-  })
+    await input.setValue("!§$%/()=*-_.:,;<>");
+    expect(wrapper.vm.sonderzeichen).toBe("!§$%/()=*-_.:,;<>");
+  });
 
   it('checks if slider is present in PwGenerator', () => {
     expect(wrapper.find("#Passwortlaenge").exists()).toBe(true);
   });
 
   it("checks if output field exists", () => {
-    expect(wrapper.find("#output_password").exists()).toBe(true)
-  })
+    expect(wrapper.find("#output_password").exists()).toBe(true);
+  });
 
   it("password output is stored in var", async () => {
-    let input = wrapper.find("#output_password")
-    await input.setValue("dummy")
-    expect(wrapper.vm.password).toBe("dummy")
-  })
+    let input = wrapper.find("#output_password");
+    await input.setValue("dummy");
+    expect(wrapper.vm.password).toBe("dummy");
+  });
   it("password is shown in output", async ()=>{
-    wrapper.vm.password = "dummy"
-    await localVue.nextTick()
-    expect(wrapper.find("#output_password").element.value).toBe("dummy")
-  })
+    wrapper.vm.password = "dummy";
+    await localVue.nextTick();
+    expect(wrapper.find("#output_password").element.value).toBe("dummy");
+  });
 
   it("checks if hash field exists", () => {
-    expect(wrapper.find("#output_hash").exists()).toBe(true)
-  })
+    expect(wrapper.find("#output_hash").exists()).toBe(true);
+  });
 });
 
 test('return a random char', () => {
   const localVue = createLocalVue();
-  const vuetify = new Vuetify;
+  const vuetify = new Vuetify();
   const wrapper = mount(PwGenerator, {
     localVue,
     vuetify
@@ -110,12 +110,12 @@ test('return a random char', () => {
 
   const str = wrapper.vm.getRandomChar();
   expect(typeof str).toBe("string");
-  expect(str.length).toBe(1)
+  expect(str.length).toBe(1);
 });
 
 test('returns a password with length of passwordLength', () => {
   const localVue = createLocalVue();
-  const vuetify = new Vuetify;
+  const vuetify = new Vuetify();
   const wrapper = mount(PwGenerator, {
     localVue,
     vuetify
