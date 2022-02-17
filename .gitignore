@@ -21,3 +21,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+tests/unit/__snapshots__/example.spec.js.snap
