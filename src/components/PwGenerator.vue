@@ -5,7 +5,7 @@
         <v-col cols="12" sm="6">
           <v-text-field
             id="Sonderzeichen"
-            v-model="sonderzeichen"
+            v-model="specialChars"
             label="Sonderzeichen"
             clearable
             @keydown="generatePassword"
@@ -57,9 +57,12 @@ export default {
   data: () => ({
     passwordLength: 12,
     password: "",
-    sonderzeichen: "!§$%/()=*-_.:,;<>",
+    specialChars: "!§$%/()=*-_.:,;<>",
     ticksLabels: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
     counter: 0,
+    numbers: "0123456789",
+    capitalLetters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    smallLetters: "abcdefghijklmnopqrstuvwxyz",
   }),
   created: function () {
     this.generatePassword();
@@ -72,21 +75,33 @@ export default {
   methods: {
     getRandomChar() {
       const allowed =
-        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-        this.sonderzeichen;
+        this.numbers +
+        this.smallLetters +
+        this.capitalLetters +
+        this.specialChars;
       return allowed[Math.floor(Math.random() * allowed.length)];
     },
     generatePassword() {
+      const specialCharsReg = new RegExp(
+        "[" + this.specialChars.replace("-", "\\-").replace("/", "\\/") + "]+",
+        "g"
+      );
+      const numbersReg = new RegExp("[0-9]+", "g");
+      const lowerReg = new RegExp("[a-z]+", "g");
+      const upperReg = new RegExp("[A-Z]+", "g");
+
       let result = "";
-      let reg = new RegExp("[" + this.sonderzeichen + "]+");
-      while (!reg.test(result)) {
+      while (
+        specialCharsReg.test(result) == false ||
+        numbersReg.test(result) == false ||
+        lowerReg.test(result) == false ||
+        upperReg.test(result) == false
+      ) {
         result = "";
         for (let c = 0; c < this.passwordLength; c++) {
           result += this.getRandomChar();
         }
       }
-      // todo testen ob min: 1 großBuchstabe, 1 kleinBuchstabe, 1 Zahl und 1 Sonderzeichen enthalten ist
-      // wenn nicht nochmal "würfeln"
       this.password = result;
       return result;
     },
