@@ -73,7 +73,7 @@ describe('PwGenerator.vue', () => {
     let input = wrapper.find("#Sonderzeichen");
     //console.warn(input.html())
     await input.setValue("!§$%/()=*-_.:,;<>");
-    expect(wrapper.vm.sonderzeichen).toBe("!§$%/()=*-_.:,;<>");
+    expect(wrapper.vm.specialChars).toBe("!§$%/()=*-_.:,;<>");
   });
 
   it('checks if slider is present in PwGenerator', () => {
@@ -133,7 +133,7 @@ test('returns a password with length of passwordLength', () => {
   expect(wrapper.vm.password.length).toBe(3);
 
   const len = 4;
-  let re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[" + wrapper.vm.sonderzeichen + "])[A-Za-z\\d" + wrapper.vm.sonderzeichen + "]{" + len + ",}$");
+  let re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[" + wrapper.vm.specialChars + "])[A-Za-z\\d" + wrapper.vm.specialChars + "]{" + len + ",}$");
   wrapper.vm.passwordLength = len;
   wrapper.vm.generatePassword();
   console.log(wrapper.vm.password);
