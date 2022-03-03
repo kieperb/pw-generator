@@ -1,6 +1,7 @@
 # pw-generator
 
-https://github.com/kieperb/pw-generator-demo
+https://kieperb.github.io/pw-generator-demo/
+
 
 ## Project setup
 ```
