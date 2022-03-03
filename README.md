@@ -1,5 +1,7 @@
 # pw-generator
 
+https://github.com/kieperb/pw-generator-demo
+
 ## Project setup
 ```
 npm install
