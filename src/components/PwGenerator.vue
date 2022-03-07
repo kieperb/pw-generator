@@ -36,13 +36,24 @@
 
       <v-row>
         <v-col>
-          <v-text-field id="output_password" v-model="password"></v-text-field>
+          <v-text-field
+            append-icon="mdi-refresh"
+            label="Passwort"
+            id="output_password"
+            v-model="password"
+            @click:append="generatePassword"
+          ></v-text-field>
         </v-col>
       </v-row>
 
       <v-row>
         <v-col>
-          <v-text-field readonly v-model="hash" id="output_hash"></v-text-field>
+          <v-text-field
+            label="bcrypt hash"
+            readonly
+            v-model="hash"
+            id="output_hash"
+          ></v-text-field>
         </v-col>
       </v-row>
     </v-form>
