@@ -1,7 +1,10 @@
 <template>
   <v-app>
     <v-main>
-      <PwGenerator />
+      <v-card max-width="1000" class="mx-auto my-12">
+        <v-card-title> Vue.js Vuetify Test: Passwort Generator </v-card-title>
+        <PwGenerator />
+      </v-card>
     </v-main>
   </v-app>
 </template>
